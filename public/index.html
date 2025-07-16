@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ritikh Edits - When Trends Meets Fashion</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <h1>Ritikh Edits</h1>
+        <span class="brand-tagline">Where Trends Meets Fashion</span>
+      </div>
+      
+      <div class="nav-menu">
+        <div class="gender-filters">
+          <button class="filter-btn active" data-gender="all">All</button>
+          <button class="filter-btn" data-gender="men">Men</button>
+          <button class="filter-btn" data-gender="women">Women</button>
+        </div>
+        
+        <button class="cart-toggle" id="cartToggle">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        
+        <button class="mobile-menu-toggle" id="mobileToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Discover Your Style</h2>
+      <p>Premium quality clothing for the modern lifestyle</p>
+    </div>
+    <div class="hero-gradient"></div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories-section">
+    <div class="container">
+      <h2 class="section-title">Shop by Category</h2>
+      <div class="categories-grid">
+        <div class="category-card" data-category="hoodie">
+          <div class="category-icon">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <h3>Hoodies</h3>
+          <p>Comfort meets style</p>
+        </div>
+        <div class="category-card" data-category="tshirt">
+          <div class="category-icon">
+            <i class="fas fa-shirt"></i>
+          </div>
+          <h3>T-Shirts</h3>
+          <p>Everyday essentials</p>
+        </div>
+        <div class="category-card" data-category="oversized">
+          <div class="category-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3>Oversized</h3>
+          <p>Relaxed fit fashion</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products-section">
+    <div class="container">
+      <div class="products-header">
+        <h2 class="section-title">Our Collection</h2>
+        <div class="sort-options">
+          <select id="sortSelect">
+            <option value="default">Sort by</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="products-grid" id="productGrid">
+        <!-- Products will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Sidebar -->
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Shopping Cart</h2>
+      <button class="cart-close" id="cartClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="cart-content">
+      <div class="cart-items" id="cartItems">
+        <div class="empty-cart">
+          <i class="fas fa-shopping-bag"></i>
+          <p>Your cart is empty</p>
+        </div>
+      </div>
+      
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total: ₹<span id="cartTotal">0</span></span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">
+          <i class="fas fa-credit-card"></i>
+          Checkout
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- Shipping Modal -->
+  <div class="modal-overlay" id="shippingOverlay">
+    <div class="modal" id="shippingModal">
+      <div class="modal-header">
+        <h2>Shipping Details</h2>
+        <button class="modal-close" id="shippingClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <form class="shipping-form" id="shippingForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea id="address" rows="3" required></textarea>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact">Contact Number</label>
+            <input type="tel" id="contact" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-arrow-right"></i>
+          Proceed to Payment
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="modal-overlay" id="paymentOverlay">
+    <div class="modal" id="paymentModal">
+      <div class="modal-header">
+        <h2>Payment</h2>
+        <button class="modal-close" id="paymentClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="payment-content">
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div id="orderSummary"></div>
+        </div>
+        
+        <div class="payment-methods">
+          <h3>Payment Method</h3>
+          <div class="payment-options">
+            <div class="payment-option">
+              <i class="fas fa-credit-card"></i>
+              <span>Credit/Debit Card</span>
+            </div>
+            <div class="payment-option">
+              <i class="fab fa-paypal"></i>
+              <span>PayPal</span>
+            </div>
+            <div class="payment-option">
+              <i class="fas fa-university"></i>
+              <span>Net Banking</span>
+            </div>
+          </div>
+        </div>
+        
+        <button class="place-order-btn" id="placeOrderBtn">
+          <i class="fas fa-check"></i>
+          Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successOverlay">
+    <div class="modal success-modal">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Order Placed Successfully!</h2>
+      <p>Thank you for your purchase. You'll receive a confirmation email shortly.</p>
+      <button class="continue-btn" id="continueBtn">Continue Shopping</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
