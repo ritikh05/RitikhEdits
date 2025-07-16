@@ -18,6 +18,13 @@ app.use(express.json());
 
 // Routes
 app.use("/api/orders", orderRoutes);
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "../public"))); // serve static files from public/
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html")); // fallback to index.html
+});
 
 // MongoDB Connection
 mongoose
