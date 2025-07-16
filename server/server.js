@@ -8,7 +8,6 @@ dotenv.config();
 console.log("EMAIL_USER =", process.env.EMAIL_USER);
 console.log("EMAIL_PASS =", process.env.EMAIL_PASS ? "✅ LOADED" : "❌ NOT LOADED");
 
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -16,20 +15,18 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// API Routes
 app.use("/api/orders", orderRoutes);
+
+// Serve static frontend files
 const path = require("path");
-
-app.use(express.static(path.join(__dirname, "../public"))); // serve static files from public/
-
 const publicPath = path.resolve(__dirname, "../public");
-
 app.use(express.static(publicPath));
 
+// Fallback to index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"));
 });
-
 
 // MongoDB Connection
 mongoose
